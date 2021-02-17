@@ -13,7 +13,7 @@ class m_penjualan extends CI_Model{
 		$currentid = $this->db->query("
 			SELECT `AUTO_INCREMENT`
 			FROM  INFORMATION_SCHEMA.TABLES
-			WHERE TABLE_SCHEMA = 'dbakademis'
+			WHERE TABLE_SCHEMA = 'andimart'
 			AND   TABLE_NAME   = 'penjualan';
 			")->result();
 		$currentid = json_decode(json_encode($currentid), true);

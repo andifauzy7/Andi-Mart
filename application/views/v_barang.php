@@ -16,11 +16,13 @@ function rupiah($angka){
   <div class="container">
     <div class="row">
       <?php foreach ($barang as $item): ?>
-        <div class="col-sm-4 py-2">
+        <div class="col-6 col-sm-6 col-md-4 py-2">
             <div class="card h-100 border-primary">
                 <div class="card-body">
                     <h4 class="card-title" style="text-align: center;"><?=$item->namaBarang;?></h4>
-                    <img src="<?php echo base_url(); ?>fotoBarang/<?php echo $item->namaFileFoto; ?>" style="max-width: 100%;">
+                    <a href="<?=base_url();?>c_barang/detail">
+                      <img src="<?php echo base_url(); ?>fotoBarang/<?php echo $item->namaFileFoto; ?>" style="max-width: 100%;">
+                    </a>
                     <h4 class="card-title" style="text-align: center;"><?=rupiah($item->hargaBarang);?></h4>
                     <div style="text-align: center;">
                       <h4 class="badge badge-info tex-wrap"><?=$item->beratBarang/1000 . " KG";?></h4>

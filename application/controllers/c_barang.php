@@ -14,6 +14,11 @@ class c_barang extends CI_Controller {
     	$this->template->utama('v_barang', $data);
   	}
 
+  	public function detail(){
+		$data = null;
+    	$this->template->utama('v_detail_barang', $data);
+  	}
+
   	public function filter(){
 		$data["barang"] = $this->m_barang->filter($_POST["nama"])->result();
     	$this->template->utama('v_barang', $data);

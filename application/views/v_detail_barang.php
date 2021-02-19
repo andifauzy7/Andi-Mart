@@ -19,7 +19,7 @@ function rupiah($angka){
 	<title></title>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <h4>Produk : <?=$barang->namaBarang;?></h4>
     <div class="row">
     	<div class="col-4 py-2">
@@ -49,54 +49,77 @@ function rupiah($angka){
     </div>
     <br>
     <h4>Review</h4>
-	<table class="table">
-	  <thead>
-	    <tr>
-	      <th scope="col">#</th>
-	      <th scope="col">Pembeli</th>
-	      <th scope="col">Ulasan</th>
-	      <th scope="col">Rating</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Mark</td>
-	      <td>Otto</td>
-	      <td>
-	      	<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star"></span>
-			<span class="fa fa-star"></span>
-	      </td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td>Jacob</td>
-	      <td>Thornton</td>
-	      <td>
-	      	<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star"></span>
-	      </td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td>Larry</td>
-	      <td>the Bird</td>
-	      <td>
-	      	<span class="fa fa-star checked"></span>
-			<span class="fa fa-star checked"></span>
-			<span class="fa fa-star"></span>
-			<span class="fa fa-star"></span>
-			<span class="fa fa-star"></span>
-	      </td>
-	    </tr>
-	  </tbody>
-	</table>
+	<div class="row">
+		<div class="col-12 py-2">
+			<div class="card h-100 border-primary">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-3">
+							Mark Otto
+						</div>
+						<div class="col-9">
+							<div class="row">
+								<div class="col-12">
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+								</div>
+								<div class="col-12 mt-3">
+									Rekomendasi banget nih bro & Sis, yang punya lapak Fast Respon oke banget, unit hp nya Original 
+									100%, Dannnnn Cepat Sampai nya.. jadi Yang Mau order jangan kelamaan mikir, buruannnnnnnnnn!!!
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row mt-4">
+						<div class="col-3">
+							Jacob Thornton
+						</div>
+						<div class="col-9">
+							<div class="row">
+								<div class="col-12">
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star"></span>
+								</div>
+								<div class="col-12 mt-3">
+									Rekomendasi banget nih bro & Sis, yang punya lapak Fast Respon oke banget, unit hp nya Original 
+									100%, Dannnnn Cepat Sampai nya.. jadi Yang Mau order jangan kelamaan mikir, buruannnnnnnnnn!!!
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row mt-4">
+						<div class="col-3">
+							Larry The Bird
+						</div>
+						<div class="col-9">
+							<div class="row">
+								<div class="col-12">
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star checked"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+								</div>
+								<div class="col-12 mt-3">
+									Rekomendasi banget nih bro & Sis, yang punya lapak Fast Respon oke banget, unit hp nya Original 
+									100%, Dannnnn Cepat Sampai nya.. jadi Yang Mau order jangan kelamaan mikir, buruannnnnnnnnn!!!
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <br>
 </div>
 </body>
 </html>

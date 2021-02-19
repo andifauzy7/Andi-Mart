@@ -14,8 +14,8 @@ class c_barang extends CI_Controller {
     	$this->template->utama('v_barang', $data);
   	}
 
-  	public function detail(){
-		$data = null;
+  	public function detail($id){
+  		$data["barang"] = $this->m_barang->find($id);
     	$this->template->utama('v_detail_barang', $data);
   	}
 

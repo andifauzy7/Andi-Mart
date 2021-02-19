@@ -20,7 +20,7 @@ function rupiah($angka){
             <div class="card h-100 border-primary">
                 <div class="card-body">
                     <h4 class="card-title" style="text-align: center;"><?=$item->namaBarang;?></h4>
-                    <a href="<?=base_url();?>c_barang/detail">
+                    <a href="<?=base_url();?>c_barang/detail/<?=$item->kodeBarang;?>">
                       <img src="<?php echo base_url(); ?>fotoBarang/<?php echo $item->namaFileFoto; ?>" style="max-width: 100%;">
                     </a>
                     <h4 class="card-title" style="text-align: center;"><?=rupiah($item->hargaBarang);?></h4>

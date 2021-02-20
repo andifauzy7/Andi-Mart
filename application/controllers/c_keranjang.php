@@ -7,6 +7,10 @@ class c_keranjang extends CI_Controller {
 	    parent::__construct();
 	    $this->load->library('template');
 	    $this->load->model('m_barang');
+	    if( ! $this->session->userdata('logged_in')){
+        	print_r('Anda harus Login terlebih dahulu'); 
+        	redirect('c_user/login');
+        }
 	}
 
   	public function tambah_keranjang($id){

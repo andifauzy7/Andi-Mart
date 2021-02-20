@@ -47,7 +47,33 @@
         <a class="nav-link" href="<?=base_url('c_jual');?>">Tabel Penjualan</a>
       </li>
     </ul>
-  </div>  
+  </div>
+  <div class="dropdown">
+    <div class="btn-group dropleft">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <?php
+      if($this->session->userdata('logged_in')==FALSE){
+        echo 'Login / Register';
+      } else {
+        $check = $this->session->get_userdata();
+        echo $check['name'];
+
+      }?>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <?php
+      if($this->session->userdata('logged_in')==FALSE){
+      ?>
+      <a class="dropdown-item" href="<?php echo base_url()?>c_user/register">Register</a>
+      <a class="dropdown-item" href="<?php echo base_url()?>c_user/login">Login</a>
+      <?php } else {?>
+      <a class="dropdown-item" href="<?php echo base_url()?>c_user/edit_profile">Edit Profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="<?php echo base_url()?>c_user/logout">Logout</a>
+    <?php }?>
+    </div>
+  </div>
+  </div> 
 </nav>
 
 <div class="container" style="margin-top:30px; min-height: 500px;">

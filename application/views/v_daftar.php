@@ -29,28 +29,35 @@
             <div class="card-body">
                 <h3 class="card-title" style="text-align: center;">ANDI<b>MART</b></h3>
                 <h4 class="card-title" style="text-align: center;">Halaman Register</h4>
-                <form>
+                <form action="<?php echo base_url()?>c_user/pendaftaran" method="post">
 					<div class="form-group">
 					  <label for="nama">Nama:</label>
-					  <input type="text" name="Nama Lengkap" placeholder="Nama Lengkap" class="form-control" id="nama">
+					  <input type="text" name="nama_lengkap" placeholder="Nama Lengkap" class="form-control" id="nama_lengkap">
 					</div>
 					<div class="form-group">
 					  <label for="email">Email:</label>
-					  <input type="text" name="Email" placeholder="Masukkan Email" class="form-control" id="email">
+					  <input type="text" name="email" placeholder="Masukkan Email" class="form-control" id="email">
 					</div>
 					<div class="form-group">
 					  <label for="pwd">Password:</label>
-					  <input type="password" placeholder="Password" class="form-control" id="pwd">
+					  <input type="password" name="password" placeholder="Password" class="form-control" id="password">
+					</div>
+					<div class="form-group">
+					  <label for="pwdconfirm">Confirm Password:</label>
+					  <input type="password" name="password_confirm" placeholder="Konfirmasi Password" class="form-control" id="password_confirm">
 					</div>
 					<center>
 						<input type="submit" class="btn btn-primary" value="Daftar">
 					</center>
 					<p align="right"><br>Sudah punya akun? 
-						<a href="<?=base_url('c_login');?>">Login</a></br></p>
+						<a href="<?=base_url('c_user/register');?>">Login</a></br></p>
                 </form>
+
             </div>
         </div>
+        <br><br><br><br>
 	</div>
 </div>
+
 </body>
 </html>

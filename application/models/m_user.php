@@ -26,4 +26,9 @@ class m_user extends CI_Model {
       $this->db->where('user.id_user', $id);
       return $this->db->update('user', $data);
     }
+
+    public function update($data, $id){
+      $this->db->where('user.id_user', $id);
+      return $this->db->update('user', $data);
+    }
 }

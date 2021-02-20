@@ -29,20 +29,20 @@
             <div class="card-body">
                 <h3 class="card-title" style="text-align: center;">ANDI<b>MART</b></h3>
                 <h4 class="card-title" style="text-align: center;">Halaman Login</h4>
-                <form>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" name="Email" placeholder="Masukkan Email" class="form-control" id="email">
-          </div>
-          <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" placeholder="Password" id="pwd">
-          </div>
-          <center>
-            <input type="submit" class="btn btn-primary" value="Login">
-          </center>
-          <p align="right"><br>Belum punya akun? 
-            <a href="<?=base_url('c_register');?>">Register</a></br></p>
+                <form action="<?php echo base_url()?>c_user/login_user" method="post">
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" placeholder="Masukkan Email" class="form-control" id="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" id="pwd">
+                  </div>
+                  <center>
+                    <input type="submit" class="btn btn-primary" value="Login">
+                  </center>
+                  <p align="right"><br>Belum punya akun? 
+                    <a href="<?=base_url('c_user/register');?>">Register</a></br></p>
                 </form>
             </div>
         </div>

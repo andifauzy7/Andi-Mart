@@ -46,4 +46,8 @@ class m_penjualan extends CI_Model{
 			)
 			");
 	}
+
+	function cari_penjualan($id){
+		return $this->db->query("SELECT * FROM penjualan WHERE id_penjualan='$id'");
+	}
 }

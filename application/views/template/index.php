@@ -43,6 +43,9 @@
           <?=$keranjang;?>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url('c_jual');?>">Tabel Penjualan</a>
+      </li>
     </ul>
   </div>  
 </nav>

@@ -7,33 +7,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class c_user extends CI_Controller
 {
 	
-	function __construct()
+	public function __construct()
 	{	
+		parent::__construct(); 
 		$this->load->model(array('m_user'));
-		$this->load->library(array('form_validation', 'encrypt'));
+		$this->load->library(array('form_validation', 'template', 'encrypt'));
 	}
 
-	function pendaftaran()
+	public function register()
+	{
+		$this->load->view('v_daftar');
+	}
+
+	public function pendaftaran()
 	{
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|required');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[7]|max_length[30]');
         $this->form_validation->set_rules('password_confirm', 'Confirm Password', 'required|matches[password]');
 
         if ($this->form_validation->run() == FALSE) { 
-            $this->response(array(), 500);
+            redirect('c_user/register');
         }
         else {
-            $email      = $this->post('email');
-            $password   = $this->post('password');
-            $nama       = $this->post('nama_lengkap');
-            $no_hp      = $this->post('no_hp');
-            $alamat     = $this->post('alamat');
-            $kota       = $this->post('kota');
+            $email      = $this->input->post('email');
+            $password   = $this->input->post('password');
+            $nama       = $this->input->post('nama_lengkap');
+            $no_hp      = null;
+            $alamat     = null;
+            $kota       = null;
 
-            $check = $this->M_User->getUserWhere(array('email_user' => $email));
+            $check = $this->m_user->getUserWhere(array('email_user' => $email));
 
             if (!$check){
-            $key = 'andimart2021';
+           	$key = 'andimart2021';
             $encrypted_password = $this->encrypt->encode($password, $key);
 
             $rand = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -47,10 +53,9 @@ class c_user extends CI_Controller
                     'alamat_user'   => $alamat,
                     'kota_user'     => $kota,
                     'code'          => $code,
-                    'status'        => 0,
-                    'role'          => 2
+                    'status'        => 0
                 );
-            $id = $this->M_User->insert($user);
+            $id = $this->m_user->insert($user);
 
             $config = array(
                 'protocol' => 'smtp',
@@ -88,34 +93,32 @@ class c_user extends CI_Controller
             $this->email->message($message);
 
                 if($this->email->send()){
-                    print_r('success');
-                    //redirect
+                    redirect('c_user/login');
                 } else {
-                    print_r('gagal');
-                    //redirect
+                    redirect('c_user/register');
                 }
             } else{
-            		print_r('gagal, email sudah terdaftar');
-                    //redirect
+            		//redirect('c_user/register');
+            	print_r('gagal');
             }
         }
 	}
 
-    function verifikasiAkun()
+    public function verifikasiAkun()
     {
         $id =  $this->uri->segment(3);
         $code = $this->uri->segment(4);
 
-        $user = $this->M_User->getUser($id);
+        $user = $this->m_user->getUser($id);
 
         if($user['code'] == $code){
       
             $data['status'] = 1;
-            $query = $this->M_User->activate($data, $id);
+            $query = $this->m_user->activate($data, $id);
 
             if($query){
                 print_r('success');
-                //redirect
+                redirect('c_user/login');
             } else {
                 print_r('gagal');
                 //redirect
@@ -127,55 +130,93 @@ class c_user extends CI_Controller
 
     }
 
-	function login ()
-    {
-        $email = $this->post('email');
-        $password = $this->post('password');
-        $check = $this->M_User->getUserWhere(array('email_user' => $email));
-
-        if(empty($check)){
-            $this->response(array('status' => 'Email Tidak Ditemukan'));
+    public function show_profile () {
+    	if( ! $this->session->userdata('logged_in')){
+        	print_r('Anda harus Login terlebih dahulu'); 
+        	redirect('c_user/login');
         } else {
+    	$email = $this->session->get_userdata();
+    	$check['user'] = $this->m_user->getUserWhere(array('email_user' => $email['email']));
+
+    	$this->template->utama('v_edit_profile', $check);
+    	}
+    }
+
+    public function edit_profile () {
+
+    	$id = $this->uri->segment(3);
+        $nama       = $this->input->post('nama_lengkap');
+        $no_hp      = $this->input->post('no_hp');
+        $alamat     = $this->input->post('alamat');
+        $kota       = $this->input->post('kota');
+
+        $data = array(
+        		'nama_user' => $nama, 
+        		'no_hp_user' => $no_hp,
+        		'alamat_user' => $alamat,
+        		'kota_user' => $kota
+        	);
+        $update = $this->m_user->update($data, $id);
+        if($update){
+        	print_r('success');
+        	redirect('c_user/show_profile');
+        } else {
+        	print_r('gagal');
+        	redirect('c_user/show_profile');
+        }
+    }
+
+    public function login () {
+    	$this->load->view('v_login');
+    }
+
+	public function login_user ()
+    {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $check = $this->m_user->getUserWhere(array('email_user' => $email));
+        if(empty($check)){
+           	print_r('Email Tidak Ditemukan');
+        } else if ($check['status'] == 0){
+        	print_r('Akun Belum Diverifikasi');
+        } else {
+        	$key = 'andimart2021';
             $encrypted_password = $check['password'];
-            $decrypted_password = $this->encrypt->decode($encrypted_password);
+            $decrypted_password = $this->encrypt->decode($encrypted_password, $key);
 
             if ($password == $decrypted_password){
 
                 $session = array(
                   'logged_in' => true,
-                  'email' => $check['email_user'], 
-                  'role' => $check['role']
+                  'email' => $check['email_user'],
+                  'name' => $check['nama_user']
                 );
 
                 $this->session->set_userdata($session);
                 $get_session    = $this->session->get_userdata();
                 $sessionCheck  = $get_session['logged_in'];
                 if ($sessionCheck){
-                    print_r('success');
-                	//redirect
+                	if ($check['no_hp_user'] == NULL || $check['alamat_user'] == NULL || $check['kota_user'] == NULL) {
+			        	redirect('c_user/show_profile');
+			    	} else {
+			    		redirect('c_barang');
+			    	}
                 } else {
                     print_r('gagal');
-           			//redirect
+           			redirect('c_user/login');
                 }
             } else {
             	print_r('Password Salah');
-           		//redirect
+           		redirect('c_user/login');
             }
         }
 
     }
     
-    function logout(){
-        $get_session    = $this->session->get_userdata();
-        $this->session->set_userdata(array('logged_in' => false));
-        $this->session->unset_userdata(array('email', 'role'));
-
-        if ($get_session['logged_in'] == false){
-            print_r('success');
-            //redirect
-        } else {
-            print_r('gagal');
-   			//redirect
-        }
+    public function logout(){
+		$get_session = array('logged_in', 'email', 'name', );
+		$this->cart->destroy();
+		$this->session->unset_userdata($get_session);
+        redirect('c_barang');
     }
 }

@@ -25,4 +25,20 @@ class c_history extends CI_Controller {
 		);
     	$this->template->utama('v_history', $data);
   	}
+
+  	public function riwayat_pembelian($id){
+		// Mendapatkan Informasi Pembeli.
+		$dataPenjualan = $this->m_penjualan->cari_penjualan($id)->result();
+		$dataPenjualan = json_decode(json_encode($dataPenjualan), true);
+		$dataPenjualan = $dataPenjualan[0];
+
+		// Mendapatkan Informasi Barang.
+		$dataBarang = $this->m_jual->find($id);
+		$dataBarang = json_decode(json_encode($dataBarang), true);
+		$data["transaksi"] 	= array(
+			'dataPembeli' => $dataPenjualan,
+			'dataBarang' => $dataBarang
+		);
+    	$this->template->utama('v_history', $data);
+  	}
 }

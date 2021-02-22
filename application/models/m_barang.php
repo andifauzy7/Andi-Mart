@@ -1,6 +1,6 @@
 <?php 
  
-class m_barang extends CI_Model{
+class M_barang extends CI_Model{
 	function ambil_data(){
 		return $this->db->get('barang');
 	}

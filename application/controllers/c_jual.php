@@ -11,6 +11,11 @@ class c_jual extends CI_Controller {
       $this->load->model('m_barang');
 	}
 
+	public function index(){
+		$data["jual"] = $this->m_penjualan->ambil_data()->result();
+		$this->template->utama('v_riwayat_pembelian', $data);
+	}
+
   	public function add_data(){
   		$currentid = $this->m_penjualan->get_currentid()-1;
   		foreach ($this->cart->contents() as $item){
